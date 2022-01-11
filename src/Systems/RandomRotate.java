@@ -1,12 +1,10 @@
 package Systems;
 
-import Components.MeshComponent;
-import Components.PositionComponent;
-import Components.RandomRotation;
-import Components.ShaderComponent;
+import Components.*;
 import core.Engine;
 import core.Entity;
 import core.Family;
+import phys.OBB;
 import systems.ECSSystem;
 import utils.ImmutableArray;
 
@@ -23,11 +21,17 @@ public class RandomRotate extends ECSSystem {
         for (Entity e : this.entities) {
             PositionComponent pos = e.getComponent(PositionComponent.class);
             RandomRotation random = e.getComponent(RandomRotation.class);
-            float speed = 0.1f;
-            pos.rotation.x += random.rot.x * speed;
-            pos.rotation.y += random.rot.y * speed;
-            pos.rotation.z += random.rot.z * speed;
+
+            double dtt = dt / 2;
+
+            pos.pos.x = (float) (random.rot.x * Math.sin(dtt));
+            pos.pos.y = (float) (random.rot.y * Math.sin(dtt));
+            pos.pos.z = (float) (random.rot.z * Math.sin(dtt));
+
             pos.updateMatrix();
+
+            Collider collider = e.getComponent(Collider.class);
+            if (collider != null) collider.update_collider(e);
         }
     }
 

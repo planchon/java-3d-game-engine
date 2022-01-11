@@ -15,7 +15,6 @@ public class CameraSystem extends ECSSystem {
     @Override
     public void addedToEngine(Engine engine) {
         entities = engine.getEntitiesFor(Family.all(PositionComponent.class, InputComponent.class, CameraComponent.class).get());
-        System.out.println(this.getClass().toString() + " added to the engine");
     }
 
     @Override

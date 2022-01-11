@@ -1,11 +1,8 @@
 package Game;
 
-import static org.lwjgl.glfw.GLFW.glfwPollEvents;
-
 import java.util.*;
 
 import Components.*;
-import Entities.GameEntity;
 import Systems.*;
 import core.Engine;
 import core.Entity;
@@ -15,6 +12,8 @@ import Renderer.Camera;
 import Renderer.Shader;
 import Window.Window;
 import World.WorldObject;
+
+import static org.lwjgl.glfw.GLFW.*;
 
 public class Game {
 	public final static int TICK_COUNT  = 60;
@@ -27,8 +26,7 @@ public class Game {
 	public final static float FOV = (float) Math.toRadians(60.0f);
 	public final static float MOUSE_SENSIBILITY = 0.3f;
 	public final static float KEYBOARD_SPEED = 0.1f;
-	
-	public List<GameEntity> entities = new ArrayList<GameEntity>();
+
 	public List<WorldObject> world_structure = new ArrayList<WorldObject>();
 	public Camera cam;
 	
@@ -54,8 +52,10 @@ public class Game {
 	
 	public void tick() {
 		glfwPollEvents();
+		this.global_tick_count++;
 		this.tick_count++;
-		engine.update(1/ 60.0);
+		double time = glfwGetTime();
+		engine.update(time);
 	}
 
 	public void render() {
@@ -81,11 +81,6 @@ public class Game {
 			long now_clock = System.nanoTime();
 			unprocessed += (now_clock - last_tick_clock) / NS_PER_TICK;
 			last_tick_clock = now_clock;
-			
-			if(this.win.isKeyPressed(258) && !camera_was_pressed) {
-				System.out.println(this.cam);
-				camera_was_pressed = true;
-			}
 		
 			while (unprocessed >= 1) {
 				tick();
@@ -101,49 +96,69 @@ public class Game {
 			render();
 			
 			if (System.nanoTime() - last_milli_clock > ONE_SECOND) {
-				System.out.println("[stats] tick " + this.tick_count + ", frames " + this.frame_count);
+				glfwSetWindowTitle(this.win.window_id, "game engine - fps:" + this.tick_count + " - tc:" + this.frame_count);
 				camera_was_pressed = false;
 				this.reset_stats();
 			}
 		}
+
+		this.stop();
 	}
 
 	public void init_ecs_engine_systems() {
 		RenderSystem renderSystem = new RenderSystem();
+		DebugRender debugRendering = new DebugRender();
+
+		CollisionSystem colliderSystem = new CollisionSystem();
 		InputSystem inputSystem = new InputSystem();
 		CameraSystem cameraSystem = new CameraSystem();
 		RandomRotate randomRotate = new RandomRotate();
 
 		engine.addRenderSystem(renderSystem);
+		engine.addRenderSystem(debugRendering);
 
+		engine.addSystem(randomRotate);
+		engine.addSystem(colliderSystem);
 		engine.addSystem(inputSystem);
 		engine.addSystem(cameraSystem);
-		engine.addSystem(randomRotate);
 	}
 	
 	public void init() {
 		this.win = new Window("3D renderer test", WIDTH, HEIGHT);
 		this.win.init();
 
+		// the ECS engine
 		engine = new Engine();
-		this.worldShader = new Shader("/Users/paulplanchon/Dropbox/Dev copie/3D/res/shaders/rooms/vertex.glsl", "/Users/paulplanchon/Dropbox/Dev copie/3D/res/shaders/rooms/fragment.glsl");
-
 		this.init_ecs_engine_systems();
 
-		MeshComponent cubeMesh = new MeshComponent();
-		cubeMesh.asCube();
+		this.worldShader = new Shader("/Users/paulplanchon/Dropbox/Dev copie/3D/res/shaders/rooms/vertex.glsl", "/Users/paulplanchon/Dropbox/Dev copie/3D/res/shaders/rooms/fragment.glsl");
+
+		Shader debugShader = new Shader("/Users/paulplanchon/Dropbox/Dev copie/3D/res/shaders/debug/vert.glsl", "/Users/paulplanchon/Dropbox/Dev copie/3D/res/shaders/debug/frag.glsl");
+
 		ShaderComponent shader = new ShaderComponent(this.worldShader);
 
-		Random random = new Random();
+		MeshComponent debugCube = new MeshComponent();
+		debugCube.asCube();
+		MeshComponent test = new MeshComponent();
+		test.fromFile("/Users/paulplanchon/Dropbox/Dev copie/3D/models/bunny.obj", "/Users/paulplanchon/Dropbox/Dev copie/3D/models/");
 
-		for (int i = 0; i < 100; i++) {
-			Entity cube = engine.createEntity();
-			cube.addComponent(cubeMesh);
-			cube.addComponent(new PositionComponent(new Vector3f(random.nextInt(40), random.nextInt(3), random.nextInt(40))));
-			cube.addComponent(shader);
-			cube.addComponent(new RandomRotation(new Vector3f(random.nextFloat(), random.nextFloat(), random.nextFloat())));
-			engine.addEntity(cube);
-		}
+		Entity bunny = engine.createEntity();
+		bunny.addComponent(debugCube);
+		bunny.addComponent(new DebugRendering(debugShader));
+		bunny.addComponent(new PositionComponent(new Vector3f(0, 2, 0)));
+		bunny.addComponent(new RandomRotation(new Vector3f(0, 2, 0)));
+		bunny.addComponent(new Collider("AABB"));
+		bunny.addComponent(shader);
+		engine.addEntity(bunny);
+
+		bunny = engine.createEntity();
+		bunny.addComponent(debugCube);
+		bunny.addComponent(new DebugRendering(debugShader));
+		bunny.addComponent(new PositionComponent(new Vector3f(0, 0, 0)));
+		bunny.addComponent(new RandomRotation(new Vector3f(3, 0, 0)));
+		bunny.addComponent(new Collider("AABB"));
+		bunny.addComponent(shader);
+		engine.addEntity(bunny);
 
 		Entity playerEntity = engine.createEntity();
 		playerEntity.addComponent(new CameraComponent(FOV, WIDTH, HEIGHT, Z_NEAR, Z_FAR));

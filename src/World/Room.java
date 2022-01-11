@@ -17,7 +17,6 @@ import Renderer.Texture3D;
 
 public class Room extends WorldObject {
 	public Mesh mesh;
-	
 	private int max_indices = 0;
 	
 	private Vector3d size;
@@ -34,8 +33,7 @@ public class Room extends WorldObject {
 		this.texture_test = (Texture) new Texture3D("/Users/paulplanchon/Dropbox/Dev copie/3D/res/images/room.png", 9);
 	} 
 	
-	private void generate_buffers() {		
-		
+	private void generate_buffers() {
 		this.add_face(2, 0);
 		this.add_face(1, 0);
 		this.add_face(0, 0);
@@ -43,7 +41,6 @@ public class Room extends WorldObject {
 		this.add_face(0, (float) this.size.x);
 		this.add_face(1, (float) this.size.y);
 		this.add_face(2, (float) this.size.z);
-		
 		
 		float[] positions = this.to_arrayf(this.position);
 		int[] indices = this.to_arrayi(this.indices);

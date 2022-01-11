@@ -38,16 +38,20 @@ public class Window {
 		return !glfwWindowShouldClose(this.window_id);
 	}
 	
-	public void stop() {		
-		// Free the window callbacks and destroy the window
-		glfwFreeCallbacks(this.window_id);
-		glfwDestroyWindow(this.window_id);
-	
-		// Terminate GLFW and free the error callback
-		glfwTerminate();
-		glfwSetErrorCallback(null).free();
-		
-		System.out.println("[core] stopped");
+	public void stop() {
+		try {
+			// Free the window callbacks and destroy the window
+			glfwFreeCallbacks(this.window_id);
+			glfwDestroyWindow(this.window_id);
+
+			// Terminate GLFW and free the error callback
+			glfwTerminate();
+			glfwSetErrorCallback(null).free();
+
+			System.out.println("[core] stopped");
+		} catch (Exception e) {
+
+		}
 	}
 	
 	public void init() {

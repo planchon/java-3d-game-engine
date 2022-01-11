@@ -66,6 +66,5 @@ public class Texture3D extends Texture {
 	}
 	
 	protected void finalize() {
-		GL30.glDeleteTextures(this.id);
 	}
 }

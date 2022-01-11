@@ -21,7 +21,6 @@ public class InputSystem extends ECSSystem {
     @Override
     public void addedToEngine(Engine engine) {
         entities = engine.getEntitiesFor(Family.all(InputComponent.class).get());
-        System.out.println(this.getClass().toString() + " added to the engine");
     }
 
     @Override

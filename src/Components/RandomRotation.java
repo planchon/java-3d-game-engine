@@ -7,6 +7,7 @@ import java.util.Vector;
 
 public class RandomRotation implements Component {
     public Vector3f rot;
+
     public RandomRotation(){
         this.rot = new Vector3f(1, 0, 0);
     }

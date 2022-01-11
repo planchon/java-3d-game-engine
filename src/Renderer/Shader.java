@@ -80,7 +80,9 @@ public class Shader {
 	public void setColor(String name, Vector3f col) {
 		try (MemoryStack stack = MemoryStack.stackPush()) {
             GL20.glUniform3fv(GL20.glGetUniformLocation(programShader, name), col.get(stack.mallocFloat(3)));
-        }
+        } catch (Exception e) {
+			System.out.println("cannont set color uniform " + e);
+		}
 	}
 	
 	public void setBool(String name, boolean value) {
