@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OSX_ARM_LWJGL"/>
+	<classpathentry kind="lib" path="lib/joml-1.10.3.jar"/>
+	<classpathentry kind="lib" path="lib/VoxFileParser-0.3.jar"/>
+	<classpathentry kind="lib" path="osx_lib_arm/lwjgl.jar"/>
+	<classpathentry kind="lib" path="osx_lib_arm/lwjgl-assimp.jar"/>
+	<classpathentry kind="lib" path="osx_lib_arm/lwjgl-assimp-natives-macos-arm64.jar"/>
+	<classpathentry kind="lib" path="osx_lib_arm/lwjgl-glfw.jar"/>
+	<classpathentry kind="lib" path="osx_lib_arm/lwjgl-glfw-natives-macos-arm64.jar"/>
+	<classpathentry kind="lib" path="osx_lib_arm/lwjgl-natives-macos-arm64.jar"/>
+	<classpathentry kind="lib" path="osx_lib_arm/lwjgl-openal.jar"/>
+	<classpathentry kind="lib" path="osx_lib_arm/lwjgl-openal-natives-macos-arm64.jar"/>
+	<classpathentry kind="lib" path="osx_lib_arm/lwjgl-opengl.jar"/>
+	<classpathentry kind="lib" path="osx_lib_arm/lwjgl-opengl-natives-macos-arm64.jar"/>
+	<classpathentry kind="lib" path="osx_lib_arm/lwjgl-stb.jar"/>
+	<classpathentry kind="lib" path="osx_lib_arm/lwjgl-stb-natives-macos-arm64.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
