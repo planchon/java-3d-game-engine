@@ -124,7 +124,7 @@ public class Game {
 	}
 	
 	public void init() {
-		this.win = new Window("3D renderer test", WIDTH, HEIGHT);
+		this.win = new Window("game engine", WIDTH, HEIGHT);
 		this.win.init();
 
 		// the ECS engine
