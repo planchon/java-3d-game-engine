@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="osx_lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/osx_lib/lwjgl-openal.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib/lwjgl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib/lwjgl-openal-natives-macos.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib/lwjgl-glfw-natives-macos.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib/lwjgl-natives-macos.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib/lwjgl-opengl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib/lwjgl-stb-natives-macos.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib/lwjgl-assimp.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib/lwjgl-stb.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib/lwjgl-assimp-natives-macos.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib/lwjgl-glfw.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib/lwjgl-opengl-natives-macos.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

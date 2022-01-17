@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="osx_lib_arm">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/osx_lib_arm/lwjgl-opengl-natives-macos-arm64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib_arm/lwjgl-natives-macos-arm64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib_arm/lwjgl-glfw-natives-macos-arm64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib_arm/lwjgl-openal-natives-macos-arm64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib_arm/assimp.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib_arm/lwjgl-opengl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib_arm/lwjgl-stb.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib_arm/lwjgl-assimp-natives-macos-arm64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib_arm/lwjgl-glfw.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib_arm/lwjgl-openal.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib_arm/lwjgl-assimp.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib_arm/lwjgl-stb-natives-macos-arm64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/osx_lib_arm/lwjgl.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
