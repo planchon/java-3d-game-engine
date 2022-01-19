@@ -10,8 +10,8 @@ class Interval {
 
 	public Interval getInterval(OBB obb, Vector3f axis) {
 		Vector3f[] vertex = new Vector3f[8];
-		Vector3f center = obb.pos;
-		Vector3f e = obb.size;
+		Vector3f center = new Vector3f(obb.pos);
+		Vector3f e = new Vector3f(obb.size);
 
 		float[] o = new float[9];
 		o = obb.rot.get(o);
@@ -38,9 +38,9 @@ class Interval {
 		Interval res = new Interval();
 
 		res.min = new Vector3f(axis).dot(vertex[0]);
-		res.max = new Vector3f(axis).dot(vertex[0]);
+		res.max = res.min;
 
-		for (int i = 0; i < 8; i++) {
+		for (int i = 1; i < 8; ++i) {
 			float proj = new Vector3f(axis).dot(vertex[i]);
 			res.min = (proj < res.min) ? proj : res.min;
 			res.max = (proj > res.max) ? proj : res.max;
@@ -136,13 +136,13 @@ public class OBB {
 		test[4] = new Vector3f(o2[3], o2[4], o2[5]);
 		test[5] = new Vector3f(o2[6], o2[7], o2[8]);
 
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 3; ++i) {
 			test[6 + i * 3 + 0] = new Vector3f(test[i]).cross(test[0]);
 			test[6 + i * 3 + 1] = new Vector3f(test[i]).cross(test[1]);
 			test[6 + i * 3 + 2] = new Vector3f(test[i]).cross(test[2]);
 		}
 
-		for (int i = 0; i < 15; i++) {
+		for (int i = 0; i < 15; ++i) {
 			if (!overlapOnAxis(this, other, test[i])) {
 				return false;
 			}

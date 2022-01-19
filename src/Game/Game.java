@@ -145,9 +145,9 @@ public class Game {
 		Entity bunny = engine.createEntity();
 		bunny.addComponent(debugCube);
 		bunny.addComponent(new DebugRendering(debugShader));
-		bunny.addComponent(new PositionComponent(new Vector3f(0, 2, 0)));
-		bunny.addComponent(new RandomRotation(new Vector3f(0, 2, 0)));
-		bunny.addComponent(new Collider("AABB"));
+		bunny.addComponent(new PositionComponent(new Vector3f(0, 0, 0), new Vector3f((float) -Math.PI / 4, 0, 0)));
+		bunny.addComponent(new RandomMovement(new Vector3f(0, 0, 2), new Vector3f(0, 1, 0)));
+		bunny.addComponent(new Collider("OBB"));
 		bunny.addComponent(shader);
 		engine.addEntity(bunny);
 
@@ -155,15 +155,15 @@ public class Game {
 		bunny.addComponent(debugCube);
 		bunny.addComponent(new DebugRendering(debugShader));
 		bunny.addComponent(new PositionComponent(new Vector3f(0, 0, 0)));
-		bunny.addComponent(new RandomRotation(new Vector3f(3, 0, 0)));
-		bunny.addComponent(new Collider("AABB"));
+		bunny.addComponent(new RandomMovement(new Vector3f(0, 0, 0), new Vector3f(2, 0, 0)));
+		bunny.addComponent(new Collider("OBB"));
 		bunny.addComponent(shader);
 		engine.addEntity(bunny);
 
 		Entity playerEntity = engine.createEntity();
 		playerEntity.addComponent(new CameraComponent(FOV, WIDTH, HEIGHT, Z_NEAR, Z_FAR));
 		playerEntity.addComponent(new InputComponent(this.win));
-		playerEntity.addComponent(new PositionComponent(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0)));
+		playerEntity.addComponent(new PositionComponent(new Vector3f(0, 0, 1), new Vector3f(0, 0, 0)));
 		engine.addEntity(playerEntity);
 	}
 }

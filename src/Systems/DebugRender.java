@@ -5,6 +5,7 @@ import Renderer.Camera;
 import core.Engine;
 import core.Entity;
 import core.Family;
+import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.lwjgl.opengl.GL30;
@@ -29,15 +30,29 @@ public class DebugRender extends ECSSystem {
 
         for (Entity e: this.debugEntities) {
             Collider col = e.getComponent(Collider.class);
-            PositionComponent pos = e.getComponent(PositionComponent.class);
             Matrix4f mat = new Matrix4f();
             boolean is_colliding = col.is_colliding;
             switch (col.type) {
                 case "AABB":
-                    mat = pos.worldMatrix;
                     break;
                 case "OBB":
+                    // transform 3x3 to 4x4 mat
+                    Matrix4f tmp = new Matrix4f();
+                    tmp.m00(col.obb.rot.m00);
+                    tmp.m10(col.obb.rot.m10);
+                    tmp.m20(col.obb.rot.m20);
+                    tmp.m01(col.obb.rot.m01);
+                    tmp.m11(col.obb.rot.m11);
+                    tmp.m21(col.obb.rot.m21);
+                    tmp.m02(col.obb.rot.m02);
+                    tmp.m12(col.obb.rot.m12);
+                    tmp.m22(col.obb.rot.m22);
+
                     mat = new Matrix4f();
+                    Vector3f scaledref = new Vector3f(col.obb.size).mul(col.obb.rot);
+                    mat = mat.mul(new Matrix4f().translate( new Vector3f(col.obb.pos).sub(scaledref) ));
+                    mat = mat.mul(tmp);
+//                    System.out.println(mat);
                     break;
             }
 

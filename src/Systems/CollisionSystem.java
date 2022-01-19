@@ -12,6 +12,7 @@ public class CollisionSystem extends ECSSystem {
     public ImmutableArray<Entity> OBBEntities;
     public ImmutableArray<Entity> entities;
     public boolean is_init = false;
+    boolean first = true;
 
     public void addedToEngine(Engine engine) {
         entities = engine.getEntitiesFor(Family.all(Collider.class, PositionComponent.class).get());
@@ -39,6 +40,16 @@ public class CollisionSystem extends ECSSystem {
 
                     a_collider.is_colliding = are_collinding;
                     b_collider.is_colliding = are_collinding;
+//                    if (a_collider.obb.pos.y == 0.5f) {
+//                        System.out.println("a : " + a_collider.obb.pos + ", b :" + b_collider.obb.pos);
+//                    } else {
+//                        System.out.println("a : " + b_collider.obb.pos + ", b :" + a_collider.obb.pos);
+//                    }
+
+//                    if (!are_collinding && first) {
+//                        System.out.println("a : " + a_collider.obb.pos + ", b :" + b_collider.obb.pos);
+//                        this.first = false;
+//                    }
                 }
             }
         }

@@ -90,8 +90,6 @@ public class Mesh {
 
 		bounding_min = new Vector3f(minX, minY, minZ);
 		bounding_max = new Vector3f(maxX, maxY, maxZ);
-
-		System.out.println("[debug] bounding_min " + bounding_min + " bounding_max" + bounding_max);
 	}
 
 	public float[] to_arrayf(List<Float> tmp) {
@@ -110,16 +108,5 @@ public class Mesh {
 		}
 		
 		return test;
-	}
-	
-	protected void finalize() {
-		GL30.glDisableVertexAttribArray(0);
-		
-		GL30.glBindBuffer(GL30.GL_ARRAY_BUFFER, 0);
-		GL30.glDeleteBuffers(this.VBO);
-		GL30.glDeleteBuffers(this.EBO);
-		
-		GL30.glBindVertexArray(0);
-		GL30.glDeleteVertexArrays(this.VAO);
 	}
 }

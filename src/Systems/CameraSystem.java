@@ -24,7 +24,7 @@ public class CameraSystem extends ECSSystem {
             PositionComponent pos = e.getComponent(PositionComponent.class);
             InputComponent input = e.getComponent(InputComponent.class);
 
-            float KEYBOARD_SPEED = 0.3f;
+            float KEYBOARD_SPEED = 0.1f;
             float MOUSE_SPEED = 0.3f;
 
             cam.camera.movePosition(input.keyboardVector, KEYBOARD_SPEED);

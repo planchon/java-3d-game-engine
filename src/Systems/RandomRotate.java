@@ -13,20 +13,36 @@ public class RandomRotate extends ECSSystem {
 
     @Override
     public void addedToEngine(Engine engine) {
-        entities = engine.getEntitiesFor(Family.all(PositionComponent.class, RandomRotation.class).get());
+        entities = engine.getEntitiesFor(Family.all(PositionComponent.class, RandomMovement.class).get());
     }
 
     @Override
     public void update(double dt) {
         for (Entity e : this.entities) {
             PositionComponent pos = e.getComponent(PositionComponent.class);
-            RandomRotation random = e.getComponent(RandomRotation.class);
+            RandomMovement random = e.getComponent(RandomMovement.class);
 
-            double dtt = dt / 2;
+            double dtt = dt / 4;
 
-            pos.pos.x = (float) (random.rot.x * Math.sin(dtt));
-            pos.pos.y = (float) (random.rot.y * Math.sin(dtt));
-            pos.pos.z = (float) (random.rot.z * Math.sin(dtt));
+            if (random.pos.x != 0) {
+                pos.pos.x = (float) (random.pos.x * Math.sin(dtt));
+            }
+            if (random.pos.y != 0) {
+                pos.pos.y = (float) (random.pos.y * Math.sin(dtt));
+            }
+            if (random.pos.z != 0) {
+                pos.pos.z = (float) (random.pos.z * Math.sin(dtt));
+            }
+
+            if (random.rot.x != 0) {
+                pos.rotation.x = (float) (random.rot.x * Math.sin(dtt));
+            }
+            if (random.rot.y != 0) {
+                pos.rotation.y = (float) (random.rot.y * Math.sin(dtt));
+            }
+            if (random.rot.z != 0) {
+                pos.rotation.z = (float) (random.rot.z * Math.sin(dtt));
+            }
 
             pos.updateMatrix();
 
