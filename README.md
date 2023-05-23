@@ -1,5 +1,5 @@
-# 0x10c 
-I want to reboot 0x10c game made by notch. He stopped working on it few years ago, but the idea is so great.
+# 3D Engine Java 
+3D Engine written in Java doing basic AABB and OBB colision detection at a good framerate using pECS :)
 
 ## features
  - [x] simple but not efficient rendering pipeling
